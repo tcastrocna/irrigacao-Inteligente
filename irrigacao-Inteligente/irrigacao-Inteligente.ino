@@ -36,10 +36,6 @@ unsigned long MILLIS_REAIS;
 
 int VALOR_UMIDADE;
 
-int WiFi_Flag = 0;
-bool FETCH_BLYNK_STATE = true;
-BlynkTimer timer;
-
 /*Função para monitorar o sensor de umidade do solo*/
 void monitorarSolo() {
   //ler a saida analogica do sensor de umidade do solo
@@ -78,26 +74,6 @@ BLYNK_WRITE(VIRTUAL_PIN_2) {
   ESTADO_BOTAO = !ESTADO_BOTAO;
 }
 
-// ***  Chamado a cada 2 segundos pelo SimpleTimer ***
-void checkBlynkStatus() {
-  bool isconnected = Blynk.connected();
-  if (isconnected == false) {
-    WiFi_Flag = 1;
-  }
-  if (isconnected == true) {
-    WiFi_Flag = 0;
-    if (!FETCH_BLYNK_STATE) {
-      Blynk.virtualWrite(VIRTUAL_PIN_2, ESTADO_BOTAO);
-    }
-  }
-}
-BLYNK_CONNECTED() {
-  //Solicita o estado mais recente do servidor
-  if (FETCH_BLYNK_STATE) {
-    Blynk.syncVirtual(VIRTUAL_PIN_2);
-  }
-}
-
 void controlarMotor() {
   if (((ESTADO_SOLO == HIGH) && (ESTADO_BOIA == HIGH) && (ESTADO_BOTAO == HIGH) && (ESTADO_APP == LOW)) || ((ESTADO_SOLO == HIGH) && (ESTADO_BOIA == HIGH) && (ESTADO_BOTAO == LOW) && (ESTADO_APP == HIGH))) {
     digitalWrite(PINO_RELE, HIGH);
@@ -131,13 +107,10 @@ void setup() {
   digitalWrite(LED_VERMELHO, ESTADO_LR);
   digitalWrite(LED_VERDE, ESTADO_LG);
 
-  timer.setInterval(1000L, checkBlynkStatus);
-  timer.setInterval(1000L, monitorarSolo);
 }
 
 void loop() {
   Blynk.run();
-  timer.run();
   monitorarSolo();
   monitorarBoia();
   monitorBotao();
