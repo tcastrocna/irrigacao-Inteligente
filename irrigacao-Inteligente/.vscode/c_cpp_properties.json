@@ -1,0 +1,21 @@
+{
+    "configurations": [
+      {
+        "name": "Arduino",
+        "includePath": [
+          "${workspaceFolder}",
+          "C:\\Users\\tiago\\OneDrive\\Documentos\\Arduino\\libraries"
+        ],
+        "browse": {
+          "path": [
+            "${workspaceFolder}",
+            "C:\\Users\\tiago\\OneDrive\\Documentos\\Arduino\\libraries"
+          ],
+          "limitSymbolsToIncludedHeaders": true
+        },
+        "intelliSenseMode": "msvc-x64"
+      }
+    ],
+    "version": 4
+  }
+  

@@ -1,1 +1,0 @@
-# irrigacao-Inteligente
