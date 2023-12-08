@@ -19,7 +19,7 @@
 #include <WiFi.h>
 #include <BlynkSimpleEsp32.h>
 
-char ssid[] = "Motoe";
+char ssid[] = "WIFI-ESP";
 char pass[] = "1A2b3c4d";
 
 bool ESTADO_SOLO = HIGH;
@@ -62,7 +62,7 @@ void monitorBotao() {
   MILLIS_REAIS = millis();  // Atualiza o tempo atual
   if (digitalRead(PINO_BOTAO) == LOW && MILLIS_REAIS - ULTIMO_ESTADO_BOTAO > 1000) {
     ULTIMO_ESTADO_BOTAO = MILLIS_REAIS;
-    ESTADO_BOTAO = !ESTADO_BOTAO;
+    ESTADO_BOTAO = (ESTADO_BOTAO == HIGH) ? LOW : HIGH;
     Serial.println("Botão Pressionado");
     Serial.println(ESTADO_BOTAO);
   }
@@ -71,7 +71,7 @@ void monitorBotao() {
 /*Função para receber os dados do aplicativo Blynk IoT*/
 BLYNK_WRITE(VIRTUAL_PIN_2) {
   ESTADO_APP = param.asInt();
-  ESTADO_BOTAO = !ESTADO_BOTAO;
+  ESTADO_BOTAO = (ESTADO_BOTAO == HIGH) ? LOW : HIGH;
 }
 
 void controlarMotor() {
@@ -106,7 +106,6 @@ void setup() {
   digitalWrite(PINO_RELE, ESTADO_RELE);
   digitalWrite(LED_VERMELHO, ESTADO_LR);
   digitalWrite(LED_VERDE, ESTADO_LG);
-
 }
 
 void loop() {
