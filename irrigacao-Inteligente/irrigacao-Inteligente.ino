@@ -1,6 +1,6 @@
-#define BLYNK_TEMPLATE_ID "TMPL2GJQq5HPf"
-#define BLYNK_TEMPLATE_NAME "IRRIGAÇÂO SMART"
-#define BLYNK_AUTH_TOKEN "qHBYYCBpttz7LXKLSU0cHp3ifcpFjwUR"
+#define BLYNK_TEMPLATE_ID "xxxxxxxxxxxxx"
+#define BLYNK_TEMPLATE_NAME "xxxxxxxxxxxxxxxxxxxx"
+#define BLYNK_AUTH_TOKEN "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 #define BAUD_RATE 9600
 #define BLYNK_PRINT Serial
